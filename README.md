@@ -15,4 +15,4 @@ Known gotchas:
 
 1. "This community doesn't allow videos"
 
-You may run into this if your bot is not an approved submitter or moderator of your community while it's trying to crosspost a video there.
+You may run into this if your bot is not an approved submitter or "allow video uploads" is unchecked in your subreddit settings. Otherwise you can add them as a moderator to your community while it's trying to crosspost videos there.

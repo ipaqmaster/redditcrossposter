@@ -73,15 +73,15 @@ class CROSSPOSTER():
   def crosspost(self):
     for submission in self.reddit.subreddit(confJson['global']['subreddit_source']).hot(limit=15):
      if not self.db.checkPost(submission):
-        print('Seen new submission: ' + submission.id)
+        print('Seen untracked submission: ' + submission.id)
+
+        if not submission.score > confJson['global']['source_post_min_score']:
+          print('\tSubmission score of ' + str(submission.score) + ' not at minimum: ' + str(confJson['global']['source_post_min_score']) + '. Processing skipped for now.' )
+          continue
         if bool(confJson['global']['do_trackpost']):
           self.db.trackPost(submission)
         else:
           print('\tTracking crossposts in db disabled in config')
-
-        if not submission.score > confJson['global']['source_post_min_score']:
-          print('\tSubmission score of ' + str(submission.score) + ' not at minimum: ' + str(confJson['global']['source_post_min_score']) )
-          continue
 
         if bool(confJson['global']['do_crosspost']):
           try:

@@ -1,0 +1,13 @@
+{
+  "global": {
+    "user_agent": "crossposterbot",
+    "subreddit_source": "",
+    "subreddit_dest": ""
+  },
+  "reddit": {
+    "client_id": "",
+    "client_secret": "",
+    "password": "",
+    "username": ""
+  }
+}

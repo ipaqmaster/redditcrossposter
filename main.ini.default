@@ -1,8 +1,13 @@
 {
   "global": {
     "user_agent": "crossposterbot",
-    "subreddit_source": "",
-    "subreddit_dest": ""
+    "retry_failed": 1,
+    "do_trackpost": 1,
+    "do_crosspost": 1,
+    "source_post_min_score": 1,
+    "subreddit_source": "all",
+    "subreddit_dest": "",
+    "debug": 0
   },
   "reddit": {
     "client_id": "",

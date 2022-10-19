@@ -72,8 +72,14 @@ class CROSSPOSTER():
 
   def crosspost(self):
     for submission in self.reddit.subreddit(confJson['global']['subreddit_source']).hot(limit=15):
-     if not self.db.checkPost(submission):
+      if not self.db.checkPost(submission):
         print('Seen untracked submission: ' + submission.id)
+
+        if submission.over_18:
+          if bool(confJson['global']['ignore_nsfw']):
+            print('Ignoring post as is NSFW while ignore_nsfw=1.')
+            continue
+
 
         if not submission.score > confJson['global']['source_post_min_score']:
           print('\tSubmission score of ' + str(submission.score) + ' not at minimum: ' + str(confJson['global']['source_post_min_score']) + '. Processing skipped for now.' )
@@ -86,7 +92,6 @@ class CROSSPOSTER():
         if bool(confJson['global']['do_crosspost']):
           try:
             result = submission.crosspost(confJson['global']['subreddit_dest'], title="[" + submission.title + "]", send_replies=True)
-            #breakpoint()
             self.db.markXpostComplete(submission, result)
           except Exception as e:
             print('\tFailed to crosspost: ' + submission.id )
